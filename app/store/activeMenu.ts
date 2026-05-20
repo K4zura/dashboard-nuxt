@@ -1,6 +1,5 @@
-export const activeMenu = ref(null)
+export const activeMenu = ref<string | null>(null);
 
-/* trunk-ignore(eslint/@typescript-eslint/no-explicit-any) */
-export function setMenu(menu: any) {
-    activeMenu.value = activeMenu.value === menu ? null : menu
+export function setMenu(menu: string) {
+  activeMenu.value = activeMenu.value === menu ? null : menu;
 }

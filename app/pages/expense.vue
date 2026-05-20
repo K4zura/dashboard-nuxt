@@ -117,6 +117,10 @@ const modal = ref(false);
 const { getEnumOptions } = useEnums();
 const recurrenceOptions = ref();
 
+definePageMeta({
+  middleware: ["auth"],
+});
+
 const openModal = () => {
   modal.value = !modal.value;
 };
@@ -141,8 +145,13 @@ const addExpense = async () => {
     .insert({
       user_id: user.value?.sub,
       name: expenseName.value,
-      mount: expenseMount.value,
-      type: expenseType.value,
+      mount: Number(expenseMount.value),
+      type: expenseType.value as
+        | "yearly"
+        | "monthly"
+        | "weekly"
+        | "daily"
+        | "once",
     })
     .select()
     .single();

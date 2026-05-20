@@ -112,6 +112,10 @@ const incomeType = ref("");
 const incomes = ref();
 const modal = ref(false);
 
+definePageMeta({
+  middleware: ["auth"],
+});
+
 const openModal = () => {
   modal.value = !modal.value;
 };
@@ -136,7 +140,7 @@ const addIncome = async () => {
     .insert({
       user_id: user.value?.sub,
       name: incomeToSave.value,
-      mount: incomeMount.value,
+      mount: Number(incomeMount.value),
       type: incomeType.value,
     })
     .select()
